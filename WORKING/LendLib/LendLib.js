@@ -4,8 +4,9 @@ if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
   
-  function focusText(i){
+  function focusText(i,val){
     i.focus();
+    i.value = val ? val : "";
     i.select();
   }
   
@@ -79,22 +80,21 @@ if (Meteor.isClient) {
   
   Template.list.helpers({
     items: function(){
-      if (Session.equals('current_list',null)) {
+      if (Session.equals('current_list',null))
         return null;
-      } else {
+      else {
         var cats = lists.findOne({
           _id: Session.get('current_list')
         });
         if (cats && cats.items){
-          for (var i =0; i < cats.length; i++){
+          for (var i=0 ; i< cats.items.length; i++){
             var itm = cats.items[i];
-            itm.Lendee = item.LentTo ? itm.LentTo : "free";
-            itm.LendClass = item.LentTo ? "label-danger" : "label-success";
+            itm.Lendee = itm.LentTo ? itm.LentTo: "free";
+            itm.LendClass = itm.LentTo ? "label-danger" : "label-success";
           }
           return cats.items;
         };
       };
-      
     },
     list_selected : function(){
       return ((Session.get('current_list')!= null) && 
