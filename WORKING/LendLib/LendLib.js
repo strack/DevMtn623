@@ -48,20 +48,10 @@ if (Meteor.isClient) {
       return Session.equals('adding_category',true);
     },
     list_status : function(){
-      if (Session.equals('current_list'), this._id)
+      if (Session.equals('current_list',this._id))
         return " btn-info";
       else
         return " btn-primary";
-    },
-    list_selected : function(){
-      return ((Session.get('current_list')!= null) && 
-              (!Session.equals('current_list',null)));
-    },
-    list_adding : function(){
-      return (Session.equals('list_adding',true));
-    },
-    lendee_editing : function(){
-      return (Session.equals('lendee_input',this.Name));
     }
   });
   Template.categories.events({
@@ -105,6 +95,16 @@ if (Meteor.isClient) {
         };
       };
       
+    },
+    list_selected : function(){
+      return ((Session.get('current_list')!= null) && 
+              (!Session.equals('current_list',null)));
+    },
+    list_adding : function(){
+      return (Session.equals('list_adding',true));
+    },
+    lendee_editing : function(){
+      return (Session.equals('lendee_input',this.Name));
     }
   });
   Template.list.events({

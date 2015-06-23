@@ -39,7 +39,7 @@
       <div class="lending_item list-group-item">
         <button class="close delete_item" id="{{Name}}">x</button>
         {{Name}}
-        {{if lendee_editing}}
+        {{#if lendee_editing}}
           <input type="text" id="edit_lendee" class="span-2" value="">
         {{else}}
           <div class="lendee label {{LendClass}}">
